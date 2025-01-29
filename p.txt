@@ -1,0 +1,98 @@
+Processing item: d, Current Beta: ['d']
+***************projecting database***********
+itemset: ['d']
+database: [{'tid': 6, 'items': ['d', 'c', 'e', 'a', 'b', 'g', 'f'], 'quantities': [2, 4, 1, 2, 1, 1, 3], 'profits': [4, 1, 1, 1, 1, -2, -1]}, {'tid': 1, 'items': ['d', 'e', 'a', 'b', 'g', 'f'], 'quantities': [1, 3, 2, 2, 1, 2], 'profits': [4, 1, -2, 1, -2, -1]}, {'tid': 3, 'items': ['d', 'c', 'e', 'b', 'f'], 'quantities': [3, 1, 2, 2, 1], 'profits': [4, 1, 1, -1, -1]}, {'tid': 5, 'items': ['a', 'f'], 'quantities': [2, 3], 'profits': [2, -1]}, {'tid': 7, 'items': ['c', 'e', 'b'], 'quantities': [2, 2, 3], 'profits': [2, 2, 1]}, {'tid': 2, 'items': ['c', 'b'], 'quantities': [5, 1], 'profits': [1, -1]}, {'tid': 4, 'items': ['d', 'c', 'e'], 'quantities': [1, 2, 3], 'profits': [4, 1, 1]}]
+Utility of Beta: 28
+Projected Database: [{'tid': 6, 'items': ['c', 'e', 'a', 'b', 'g', 'f'], 'profits': [1, 1, 1, 1, -2, -1], 'quantities': [4, 1, 2, 1, 1, 3], 'u_project': 8}, {'tid': 1, 'items': ['e', 'a', 'b', 'g', 'f'], 'profits': [1, -2, 1, -2, -1], 'quantities': [3, 2, 2, 1, 2], 'u_project': 4}, {'tid': 3, 'items': ['c', 'e', 'b', 'f'], 'profits': [1, 1, -1, -1], 'quantities': [1, 2, 2, 1], 'u_project': 12}, {'tid': 4, 'items': ['c', 'e'], 'profits': [1, 1], 'quantities': [2, 3], 'u_project': 4}]
+High Utility Itemset Found: ['d'] with Utility 28
+
+Processing item: g, Current Beta: ['d', 'g']
+***************projecting database***********
+itemset: ['d', 'g']
+database: [{'tid': 6, 'items': ['d', 'c', 'e', 'a', 'b', 'g', 'f'], 'quantities': [2, 4, 1, 2, 1, 1, 3], 'profits': [4, 1, 1, 1, 1, -2, -1]}, {'tid': 1, 'items': ['d', 'e', 'a', 'b', 'g', 'f'], 'quantities': [1, 3, 2, 2, 1, 2], 'profits': [4, 1, -2, 1, -2, -1]}, {'tid': 3, 'items': ['d', 'c', 'e', 'b', 'f'], 'quantities': [3, 1, 2, 2, 1], 'profits': [4, 1, 1, -1, -1]}, {'tid': 5, 'items': ['a', 'f'], 'quantities': [2, 3], 'profits': [2, -1]}, {'tid': 7, 'items': ['c', 'e', 'b'], 'quantities': [2, 2, 3], 'profits': [2, 2, 1]}, {'tid': 2, 'items': ['c', 'b'], 'quantities': [5, 1], 'profits': [1, -1]}, {'tid': 4, 'items': ['d', 'c', 'e'], 'quantities': [1, 2, 3], 'profits': [4, 1, 1]}]
+Database from Search: [{'tid': 6, 'items': ['c', 'e', 'a', 'b', 'g', 'f'], 'profits': [1, 1, 1, 1, -2, -1], 'quantities': [4, 1, 2, 1, 1, 3], 'u_project': 8}, {'tid': 1, 'items': ['e', 'a', 'b', 'g', 'f'], 'profits': [1, -2, 1, -2, -1], 'quantities': [3, 2, 2, 1, 2], 'u_project': 4}, {'tid': 3, 'items': ['c', 'e', 'b', 'f'], 'profits': [1, 1, -1, -1], 'quantities': [1, 2, 2, 1], 'u_project': 12}, {'tid': 4, 'items': ['c', 'e'], 'profits': [1, 1], 'quantities': [2, 3], 'u_project': 4}]
+Utility of Beta: 8
+Projected Database: [{'tid': 6, 'items': ['f'], 'profits': [-1], 'quantities': [3], 'u_project': 6}, {'tid': 1, 'items': ['f'], 'profits': [-1], 'quantities': [2], 'u_project': 2}]
+RSU for Negative Items: {'g': 0, 'f': 3}
+Filtered Negative Items: []
+
+Processing item: f, Current Beta: ['d', 'f']
+***************projecting database***********
+itemset: ['d', 'f']
+database: [{'tid': 6, 'items': ['d', 'c', 'e', 'a', 'b', 'g', 'f'], 'quantities': [2, 4, 1, 2, 1, 1, 3], 'profits': [4, 1, 1, 1, 1, -2, -1]}, {'tid': 1, 'items': ['d', 'e', 'a', 'b', 'g', 'f'], 'quantities': [1, 3, 2, 2, 1, 2], 'profits': [4, 1, -2, 1, -2, -1]}, {'tid': 3, 'items': ['d', 'c', 'e', 'b', 'f'], 'quantities': [3, 1, 2, 2, 1], 'profits': [4, 1, 1, -1, -1]}, {'tid': 5, 'items': ['a', 'f'], 'quantities': [2, 3], 'profits': [2, -1]}, {'tid': 7, 'items': ['c', 'e', 'b'], 'quantities': [2, 2, 3], 'profits': [2, 2, 1]}, {'tid': 2, 'items': ['c', 'b'], 'quantities': [5, 1], 'profits': [1, -1]}, {'tid': 4, 'items': ['d', 'c', 'e'], 'quantities': [1, 2, 3], 'profits': [4, 1, 1]}]
+Database from Search: [{'tid': 6, 'items': ['c', 'e', 'a', 'b', 'g', 'f'], 'profits': [1, 1, 1, 1, -2, -1], 'quantities': [4, 1, 2, 1, 1, 3], 'u_project': 8}, {'tid': 1, 'items': ['e', 'a', 'b', 'g', 'f'], 'profits': [1, -2, 1, -2, -1], 'quantities': [3, 2, 2, 1, 2], 'u_project': 4}, {'tid': 3, 'items': ['c', 'e', 'b', 'f'], 'profits': [1, 1, -1, -1], 'quantities': [1, 2, 2, 1], 'u_project': 12}, {'tid': 4, 'items': ['c', 'e'], 'profits': [1, 1], 'quantities': [2, 3], 'u_project': 4}]
+Utility of Beta: 18
+Projected Database: []
+RSU for Negative Items: {'g': 0, 'f': 0}
+Filtered Negative Items: []
+out if
+projected_db: [{'tid': 6, 'items': ['c', 'e', 'a', 'b', 'g', 'f'], 'profits': [1, 1, 1, 1, -2, -1], 'quantities': [4, 1, 2, 1, 1, 3], 'u_project': 8}, {'tid': 1, 'items': ['e', 'a', 'b', 'g', 'f'], 'profits': [1, -2, 1, -2, -1], 'quantities': [3, 2, 2, 1, 2], 'u_project': 4}, {'tid': 3, 'items': ['c', 'e', 'b', 'f'], 'profits': [1, 1, -1, -1], 'quantities': [1, 2, 2, 1], 'u_project': 12}, {'tid': 4, 'items': ['c', 'e'], 'profits': [1, 1], 'quantities': [2, 3], 'u_project': 4}]
+RSU: {'d': 0, 'c': 40, 'e': 42, 'a': 13, 'b': 25}
+RLU: {'d': 0, 'c': 7, 'e': 9, 'a': -2, 'b': 1}
+Primary(β): ['c', 'e', 'b']
+Secondary(β): []
+
+Processing item: c, Current Beta: ['d', 'c']
+***************projecting database***********
+itemset: ['d', 'c']
+database: [{'tid': 6, 'items': ['c', 'e', 'a', 'b', 'g', 'f'], 'profits': [1, 1, 1, 1, -2, -1], 'quantities': [4, 1, 2, 1, 1, 3], 'u_project': 8}, {'tid': 1, 'items': ['e', 'a', 'b', 'g', 'f'], 'profits': [1, -2, 1, -2, -1], 'quantities': [3, 2, 2, 1, 2], 'u_project': 4}, {'tid': 3, 'items': ['c', 'e', 'b', 'f'], 'profits': [1, 1, -1, -1], 'quantities': [1, 2, 2, 1], 'u_project': 12}, {'tid': 4, 'items': ['c', 'e'], 'profits': [1, 1], 'quantities': [2, 3], 'u_project': 4}]
+Utility of Beta: 0
+Projected Database: []
+out if
+projected_db: []
+RSU: {}
+RLU: {}
+Primary(β): []
+Secondary(β): []
+
+Processing item: e, Current Beta: ['d', 'e']
+***************projecting database***********
+itemset: ['d', 'e']
+database: [{'tid': 6, 'items': ['c', 'e', 'a', 'b', 'g', 'f'], 'profits': [1, 1, 1, 1, -2, -1], 'quantities': [4, 1, 2, 1, 1, 3], 'u_project': 8}, {'tid': 1, 'items': ['e', 'a', 'b', 'g', 'f'], 'profits': [1, -2, 1, -2, -1], 'quantities': [3, 2, 2, 1, 2], 'u_project': 4}, {'tid': 3, 'items': ['c', 'e', 'b', 'f'], 'profits': [1, 1, -1, -1], 'quantities': [1, 2, 2, 1], 'u_project': 12}, {'tid': 4, 'items': ['c', 'e'], 'profits': [1, 1], 'quantities': [2, 3], 'u_project': 4}]
+Utility of Beta: 0
+Projected Database: []
+out if
+projected_db: []
+RSU: {}
+RLU: {}
+Primary(β): []
+Secondary(β): []
+
+Processing item: b, Current Beta: ['d', 'b']
+***************projecting database***********
+itemset: ['d', 'b']
+database: [{'tid': 6, 'items': ['c', 'e', 'a', 'b', 'g', 'f'], 'profits': [1, 1, 1, 1, -2, -1], 'quantities': [4, 1, 2, 1, 1, 3], 'u_project': 8}, {'tid': 1, 'items': ['e', 'a', 'b', 'g', 'f'], 'profits': [1, -2, 1, -2, -1], 'quantities': [3, 2, 2, 1, 2], 'u_project': 4}, {'tid': 3, 'items': ['c', 'e', 'b', 'f'], 'profits': [1, 1, -1, -1], 'quantities': [1, 2, 2, 1], 'u_project': 12}, {'tid': 4, 'items': ['c', 'e'], 'profits': [1, 1], 'quantities': [2, 3], 'u_project': 4}]
+Utility of Beta: 0
+Projected Database: []
+out if
+projected_db: []
+RSU: {}
+RLU: {}
+Primary(β): []
+Secondary(β): []
+
+Processing item: c, Current Beta: ['c']
+***************projecting database***********
+itemset: ['c']
+database: [{'tid': 6, 'items': ['d', 'c', 'e', 'a', 'b', 'g', 'f'], 'quantities': [2, 4, 1, 2, 1, 1, 3], 'profits': [4, 1, 1, 1, 1, -2, -1]}, {'tid': 1, 'items': ['d', 'e', 'a', 'b', 'g', 'f'], 'quantities': [1, 3, 2, 2, 1, 2], 'profits': [4, 1, -2, 1, -2, -1]}, {'tid': 3, 'items': ['d', 'c', 'e', 'b', 'f'], 'quantities': [3, 1, 2, 2, 1], 'profits': [4, 1, 1, -1, -1]}, {'tid': 5, 'items': ['a', 'f'], 'quantities': [2, 3], 'profits': [2, -1]}, {'tid': 7, 'items': ['c', 'e', 'b'], 'quantities': [2, 2, 3], 'profits': [2, 2, 1]}, {'tid': 2, 'items': ['c', 'b'], 'quantities': [5, 1], 'profits': [1, -1]}, {'tid': 4, 'items': ['d', 'c', 'e'], 'quantities': [1, 2, 3], 'profits': [4, 1, 1]}]
+Utility of Beta: 16
+Projected Database: [{'tid': 6, 'items': ['e', 'a', 'b', 'g', 'f'], 'profits': [1, 1, 1, -2, -1], 'quantities': [1, 2, 1, 1, 3], 'u_project': 4}, {'tid': 3, 'items': ['e', 'b', 'f'], 'profits': [1, -1, -1], 'quantities': [2, 2, 1], 'u_project': 1}, {'tid': 7, 'items': ['e', 'b'], 'profits': [2, 1], 'quantities': [2, 3], 'u_project': 4}, {'tid': 2, 'items': ['b'], 'profits': [-1], 'quantities': [1], 'u_project': 5}, {'tid': 4, 'items': ['e'], 'profits': [1], 'quantities': [3], 'u_project': 2}]
+out if
+projected_db: [{'tid': 6, 'items': ['e', 'a', 'b', 'g', 'f'], 'profits': [1, 1, 1, -2, -1], 'quantities': [1, 2, 1, 1, 3], 'u_project': 4}, {'tid': 3, 'items': ['e', 'b', 'f'], 'profits': [1, -1, -1], 'quantities': [2, 2, 1], 'u_project': 1}, {'tid': 7, 'items': ['e', 'b'], 'profits': [2, 1], 'quantities': [2, 3], 'u_project': 4}, {'tid': 2, 'items': ['b'], 'profits': [-1], 'quantities': [1], 'u_project': 5}, {'tid': 4, 'items': ['e'], 'profits': [1], 'quantities': [3], 'u_project': 2}]
+RSU: {'d': 0, 'c': 0, 'e': 27, 'a': 7, 'b': 15}
+RLU: {'d': 0, 'c': 0, 'e': 10, 'a': 2, 'b': 1}
+Primary(β): ['e']
+Secondary(β): []
+
+Processing item: e, Current Beta: ['c', 'e']
+***************projecting database***********
+itemset: ['c', 'e']
+database: [{'tid': 6, 'items': ['e', 'a', 'b', 'g', 'f'], 'profits': [1, 1, 1, -2, -1], 'quantities': [1, 2, 1, 1, 3], 'u_project': 4}, {'tid': 3, 'items': ['e', 'b', 'f'], 'profits': [1, -1, -1], 'quantities': [2, 2, 1], 'u_project': 1}, {'tid': 7, 'items': ['e', 'b'], 'profits': [2, 1], 'quantities': [2, 3], 'u_project': 4}, {'tid': 2, 'items': ['b'], 'profits': [-1], 'quantities': [1], 'u_project': 5}, {'tid': 4, 'items': ['e'], 'profits': [1], 'quantities': [3], 'u_project': 2}]
+Utility of Beta: 0
+Projected Database: []
+out if
+projected_db: []
+RSU: {}
+RLU: {}
+Primary(β): []
+Secondary(β): []
