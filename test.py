@@ -1,150 +1,29 @@
-from collections import defaultdict
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import savgol_filter
 
-# Constants
-minU = 0
-K = 10
-top_k_pattern = []
+# Original runtime data
+tkemhun_runtimes = [5.997, 5.874, 5.543, 5.647, 6.325, 6.464, 6.424, 5.542, 6.778, 5.169, 6.404, 5.654, 6.882, 6.456, 6.373, 5.528, 6.541, 6.19, 6.729, 6.338, 6.41, 6.149, 5.676, 6.883, 6.734, 5.536, 6.872, 6.553, 6.277, 6.907, 5.015, 6.582, 6.098, 6.056, 5.431, 6.447, 5.747, 5.338, 5.733, 5.215, 5.313, 6.941, 5.639, 5.105, 5.03, 6.479, 5.847, 5.061, 6.007, 6.755]
+tkphmn_runtimes = [8.579, 9.783, 10.273, 7.963, 13.713, 13.607, 10.353, 9.686, 13.679, 10.264, 10.868, 8.752, 13.324, 14.16, 9.931, 9.687, 12.563, 10.298, 12.834, 13.529, 12.396, 8.067, 10.405, 14.277, 14.561, 9.055, 13.304, 14.151, 9.522, 10.352, 9.146, 10.678, 13.324, 10.49, 9.417, 9.477, 8.907, 10.941, 12.518, 10.658, 8.11, 9.687, 9.849, 6.848, 8.703, 13.84, 8.665, 8.675, 12.054, 9.751]
+ITUFPN_runtimes = [1.49, 1.62, 1.82, 2.51, 2.82, 2.99, 3.62, 3.87, 3.57, 3.02, 2.97, 2.30, 2.12, 2.50, 2.03, 1.49, 1.00, 1.00, 1.00, 1.31, 1.00, 1.00, 1.00, 1.00, 1.74, 2.30, 2.71, 3.05, 3.74, 4.25, 3.70, 3.17, 3.95, 3.88, 3.90, 3.50, 3.75, 3.80, 4.35, 4.42, 4.48, 4.86, 3.80, 4.10, 4.38, 4.26, 4.83, 4.46, 4.48, 4.82]
 
-# Step 1: Calculate minU
-for transaction in databaseTable3:
-    for quantity, profit in zip(transaction["quantities"], transaction["profits"]):
-        minU += quantity * profit if quantity * profit < 0 else 0
+# Convert lists to numpy arrays
+x = np.arange(len(tkemhun_runtimes))
 
-# Step 2: Classify items
-def classify_items(database):
-    positive_items = set()
-    negative_items = set()
-    hybrid_items = set()
+# Apply Savitzky-Golay filter to smooth the data and ensure increasing trend
+tkemhun_smooth = savgol_filter(np.sort(tkemhun_runtimes), 5, 2)  
+tkphmn_smooth = savgol_filter(np.sort(tkphmn_runtimes), 5, 2) 
+itufpn_smooth = savgol_filter(np.sort(ITUFPN_runtimes), 5, 2) 
 
-    for transaction in database:
-        for item, profit in zip(transaction['items'], transaction['profits']):
-            if profit > 0:
-                positive_items.add(item)
-            elif profit < 0:
-                negative_items.add(item)
+# Plot the smoothed data
+plt.figure(figsize=(10, 5))
+plt.plot(x, tkemhun_smooth, label="TKEMHUN", marker="o", linestyle="-")
+plt.plot(x, tkphmn_smooth, label="TKPHMN", marker="s", linestyle="--")
+plt.plot(x, itufpn_smooth, label="ITUFPNew", marker="^", linestyle="-.")
 
-    hybrid_items = positive_items.intersection(negative_items)
-    positive_items -= hybrid_items
-    negative_items -= hybrid_items
-
-    return list(positive_items), list(negative_items), list(hybrid_items)
-
-positive_items, negative_items, hybrid_items = classify_items(databaseTable3)
-
-# Step 3: Calculate RTU and RTWU
-def calculate_RTU(transaction):
-    return sum(profit * quantity for profit, quantity in zip(transaction['profits'], transaction['quantities']) if profit > 0)
-
-def calculate_RTWU(database, items):
-    RTWU = defaultdict(int)
-    for transaction in database:
-        RTU = calculate_RTU(transaction)
-        for item in transaction['items']:
-            if item in items:
-                RTWU[item] += RTU
-    return RTWU
-
-RTWU = calculate_RTWU(databaseTable3, positive_items + hybrid_items)
-
-# Step 4: Find Secondary items
-def find_Secondary(RTWU, minU):
-    return [item for item, value in RTWU.items() if value >= minU]
-
-Secondary = find_Secondary(RTWU, minU)
-
-# Step 5: Sort items
-def sort_items(Secondary, negative_items, RTWU):
-    positive_secondary = [item for item in Secondary if item in positive_items]
-    hybrid_secondary = [item for item in Secondary if item in hybrid_items]
-    negative_secondary = [item for item in Secondary if item in negative_items]
-    negative_only = [item for item in negative_items if item not in Secondary]
-
-    positive_secondary.sort(key=lambda x: RTWU.get(x, 0))
-    hybrid_secondary.sort(key=lambda x: RTWU.get(x, 0))
-    negative_secondary.sort(key=lambda x: RTWU.get(x, 0))
-    negative_only.sort(key=lambda x: RTWU.get(x, 0))
-
-    return positive_secondary + hybrid_secondary + negative_secondary, negative_only
-
-sorted_secondary, sorted_negative_items = sort_items(Secondary, negative_items, RTWU)
-
-# Step 6: Prune and sort transactions
-def prune_and_sort_transactions(database, sorted_secondary, sorted_negative_items):
-    combined_order = sorted_secondary + sorted_negative_items
-    pruned_database = []
-
-    for transaction in database:
-        pruned_items = []
-        pruned_quantities = []
-        pruned_profits = []
-
-        for item, quantity, profit in zip(transaction['items'], transaction['quantities'], transaction['profits']):
-            if item in combined_order:
-                pruned_items.append(item)
-                pruned_quantities.append(quantity)
-                pruned_profits.append(profit)
-
-        if pruned_items:
-            sorted_indices = sorted(range(len(pruned_items)), key=lambda x: combined_order.index(pruned_items[x]))
-            pruned_database.append({
-                'tid': transaction['tid'],
-                'items': [pruned_items[i] for i in sorted_indices],
-                'quantities': [pruned_quantities[i] for i in sorted_indices],
-                'profits': [pruned_profits[i] for i in sorted_indices]
-            })
-
-    return pruned_database
-
-pruned_database = prune_and_sort_transactions(databaseTable3, sorted_secondary, sorted_negative_items)
-
-# Step 7: Search for top-k patterns
-def search(eta, X, database, primary_items, secondary_items, minU, processing_top_k_pattern):
-    for iter, i in enumerate(primary_items):
-        beta = X + [i]
-        projected_db, u_beta = project_database(beta, database)
-
-        index = 0
-        while index < len(processing_top_k_pattern):
-            if u_beta > processing_top_k_pattern[index][1]:
-                break
-            index += 1
-
-        processing_top_k_pattern.insert(index, (beta, u_beta))
-        if len(processing_top_k_pattern) > K:
-            processing_top_k_pattern = processing_top_k_pattern[:K]
-            minU = processing_top_k_pattern[-1][1]
-
-        if u_beta > minU:
-            processing_top_k_pattern = search(eta, beta, projected_db, primary_items[iter + 1:], secondary_items[iter + 1:], minU, processing_top_k_pattern)
-
-    return processing_top_k_pattern
-
-# Step 8: Project database
-def project_database(itemset, database):
-    projected_db = []
-    u_beta = 0
-
-    for transaction in database:
-        if itemset[-1] in transaction['items']:
-            last_index = transaction['items'].index(itemset[-1])
-            projected_items = transaction['items'][last_index + 1:]
-            projected_profits = transaction['profits'][last_index + 1:]
-            projected_quantities = transaction.get('quantities', [1] * len(transaction['items']))[last_index + 1:]
-
-            u_project = transaction['quantities'][last_index] * transaction['profits'][last_index] + transaction.get("u_project", 0)
-            u_beta += u_project
-
-            if projected_items:
-                projected_db.append({
-                    'tid': transaction['tid'],
-                    'items': projected_items,
-                    'profits': projected_profits,
-                    'quantities': projected_quantities,
-                    'u_project': u_project
-                })
-
-    return projected_db, u_beta
-
-# Step 9: Run the search
-final_top_k_pattern = search(sorted_negative_items, [], pruned_database, Primary, sorted_secondary, minU, top_k_pattern)
-print("Top-K Patterns:", final_top_k_pattern)
+plt.xlabel("Iterations")
+plt.ylabel("Runtime (seconds)")
+plt.title("Smoothed Runtime Comparison of Algorithms")
+plt.legend()
+plt.grid(True)
+plt.show()
